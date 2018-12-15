@@ -1,2 +1,8 @@
-﻿  datalog_player.cpp
+﻿  dataLog.cpp
+c:\dev\c++\datalog_player\datalog_player\datalog.cpp(73): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+c:\dev\c++\datalog_player\datalog_player\datalog.cpp(74): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+c:\dev\c++\datalog_player\datalog_player\datalog.cpp(75): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+c:\dev\c++\datalog_player\datalog_player\datalog.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+c:\dev\c++\datalog_player\datalog_player\datalog.cpp(103): warning C4018: '<': signed/unsigned mismatch
+c:\dev\c++\datalog_player\datalog_player\datalog.cpp(108): warning C4018: '<': signed/unsigned mismatch
   datalog_player.vcxproj -> C:\Dev\C++\datalog_player\Debug\datalog_player.exe

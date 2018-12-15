@@ -21,6 +21,8 @@ int dataLog::load(std::string log_file)
 
 	load_data(log_stream);
 
+	load_maps();
+
 	return 0;
 }
 
@@ -77,6 +79,25 @@ std::string dataLog::sec2hms(double time_in)
 		+ std::to_string(secs) + "," + std::to_string(msecs);
 }
 
+
+int dataLog::load_maps()
+{
+	// load fields_map
+	for (unsigned i = 0; i < field_list.size(); i++)
+	{
+		fields_map[field_list[i]] = i;
+	}
+
+	// load time map
+	for (unsigned i = 0; i < timestemp_table.size(); i ++)
+	{
+		time_map[timestemp_table[i]] = i;
+	}
+
+	return 0;
+}
+
+
 int dataLog::to_srt(std::ofstream &srt_out)
 {
 	for (int i = 0; i < (timestemp_table.size()-1); i++)
@@ -91,4 +112,62 @@ int dataLog::to_srt(std::ofstream &srt_out)
 		srt_out << "\n";
 	}
 	return 0;
+}
+
+
+unsigned dataLog::get_num_fields()
+{
+	return field_list.size() - 1;
+}
+
+
+std::string dataLog::get_field_name(unsigned idx)
+{
+	if (idx > get_num_fields()) return "";
+	return field_list[idx + 1];
+}
+
+
+double dataLog::closest_last_datapoint(double time)
+{
+	double data_point;
+	auto iter = time_map.find(time);
+	if (iter != time_map.end())
+	{
+		data_point = time_map[time];
+	}
+	else
+	{
+		unsigned start_point = 0;
+		unsigned end_point = timestemp_table.size();
+		while (true)
+		{
+			unsigned mid_point = (end_point + start_point) / 2;
+			if (mid_point == start_point)  // the closet last point is found
+			{
+				data_point = timestemp_table[mid_point];
+				break;
+			}
+			if (time < timestemp_table[mid_point])
+			{
+				end_point = mid_point;
+			}
+			else if (time > timestemp_table[mid_point])
+			{
+				start_point = mid_point;
+			}
+			else
+			{
+				data_point = timestemp_table[mid_point];
+			}
+		}
+	}
+	return data_point;
+}
+
+
+std::string get_value(std::string dield, double time)
+{
+	std::string value_0;
+	return value_0;
 }
