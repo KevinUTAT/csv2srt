@@ -7,7 +7,7 @@
 class dataLog
 {
 private:
-	// a lsit of fields of data, note that this first 'field' is "Times(s)"
+	// a list of fields of data, note that this first 'field' is "Times(s)"
 	// witch is not a valid MP field, so please ignore it we use
 	std::vector<std::string> field_list;
 	std::vector<double> timestemp_table;

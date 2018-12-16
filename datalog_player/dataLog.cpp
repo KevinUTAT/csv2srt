@@ -83,9 +83,9 @@ std::string dataLog::sec2hms(double time_in)
 int dataLog::load_maps()
 {
 	// load fields_map
-	for (unsigned i = 0; i < field_list.size(); i++)
+	for (unsigned i = 1; i < field_list.size(); i++)
 	{
-		fields_map[field_list[i]] = i;
+		fields_map[field_list[i]] = i - 1;
 	}
 
 	// load time map
@@ -166,8 +166,16 @@ double dataLog::closest_last_datapoint(double time)
 }
 
 
-std::string get_value(std::string dield, double time)
+std::string dataLog::get_value(std::string field, double time)
 {
 	std::string value_0;
+	// first find the closest last data point
+	double datapoint_time = closest_last_datapoint(time);
+
+	unsigned time_idx = time_map[datapoint_time];
+	unsigned field_idx = fields_map[field];
+
+	value_0 = log_table[time_idx][field_idx];
+
 	return value_0;
 }
